@@ -37,10 +37,8 @@ jobs:
         logout: true
     
     - name: Create Secrets File
-      run: echo "$STREAMLIT_SECRETS" > ./src/ContosoSuitesDashboard/.streamlit/secrets.toml
+      run: echo "${{ secrets.STREAMLIT_SECRETS }}" > ./src/ContosoSuitesDashboard/.streamlit/secrets.toml
       shell: bash
-      env:
-          STREAMLIT_SECRETS: ${{ secrets.STREAMLIT_SECRETS }}
 
     - name: Docker Build
       run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
